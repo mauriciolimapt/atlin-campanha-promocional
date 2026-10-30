@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="assets/atlin-mark.png">
+<title>Atlin Systems</title>
+<meta name="description" content="Websites à medida com mensalidade fixa: criação incluída, alojamento, SSL, cópias de segurança e suporte. Planos desde 95 €/mês.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: dark studio console — left-weighted hero with a live "build log" panel, pricing as the centrepiece, form on a deeper band */
+:root{
+  color-scheme:dark;
+  --night:#03101b;      /* logo ground */
+  --deep:#061826;       /* raised surface */
+  --panel:#0b2132;      /* cards */
+  --line:#183447;       /* hairlines */
+  --text:#eaf6f8;       /* primary text */
+  --soft:#9db4bf;       /* secondary text */
+  --cyan:#33e3e6;       /* logo cyan, the one accent */
+  --teal:#5fe0c8;
+  --blue:#5b93f2;
+  --wa:#1aa463;         /* WhatsApp action */
+  --display:'Sora',ui-sans-serif,system-ui,sans-serif;
+  --body:'Figtree',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
+  --r:16px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--night);color:var(--text);font:16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--night)}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.08;letter-spacing:-.025em;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.label{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--teal);display:flex;align-items:center;gap:12px}
+.label::before{content:"";width:32px;height:1px;background:currentColor}
+.grad{background:linear-gradient(95deg,var(--teal) 0%,var(--cyan) 40%,var(--blue) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.muted{color:var(--soft)}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--night) 86%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand img{width:46px;height:46px;border-radius:12px;border:1px solid var(--line);box-shadow:0 0 24px rgba(51,227,230,.18)}
+.brand b{display:block;font:700 18px/1.1 var(--display);letter-spacing:-.01em}
+.brand small{display:block;font:500 10px/1.4 var(--mono);letter-spacing:.2em;color:var(--soft);text-transform:uppercase;margin-top:3px}
+nav{display:flex;align-items:center;gap:26px;font-size:14px}
+nav a.lnk{text-decoration:none;color:var(--soft)}
+nav a.lnk:hover{color:var(--text)}
+.langs{display:flex;gap:4px;padding:3px;border:1px solid var(--line);border-radius:999px}
+.langs button{all:unset;cursor:pointer;font:600 12px/1 var(--mono);padding:7px 11px;border-radius:999px;color:var(--soft)}
+.langs button[aria-pressed="true"]{background:var(--cyan);color:var(--night)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:600 15px/1 var(--body);text-decoration:none;border:0;cursor:pointer;border-radius:12px;padding:16px 22px;transition:transform .2s,background .2s,box-shadow .2s}
+.btn-main{background:var(--cyan);color:var(--night);box-shadow:0 8px 30px rgba(51,227,230,.25)}
+.btn-main:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(51,227,230,.35)}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid #2b4c60}
+.btn-ghost:hover{border-color:var(--cyan)}
+.btn-sm{padding:11px 16px;font-size:14px;border-radius:10px}
+
+/* hero */
+.hero{position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;width:900px;height:900px;right:-300px;top:-380px;background:radial-gradient(circle,rgba(51,227,230,.16),transparent 60%);pointer-events:none}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;padding-block:72px 64px;position:relative}
+.hero h1{font-size:clamp(40px,6vw,74px);font-weight:800;margin:22px 0 22px}
+.lead{font-size:clamp(17px,1.6vw,19px);color:var(--soft);max-width:540px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.facts{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:34px;padding-top:24px;border-top:1px solid var(--line);font-size:14px;color:var(--soft)}
+.facts b{color:var(--text);font-family:var(--display);font-weight:700}
+.console{background:var(--deep);border:1px solid var(--line);border-radius:18px;box-shadow:0 30px 80px rgba(0,0,0,.45),0 0 0 1px rgba(51,227,230,.05);overflow:hidden;min-width:0}
+.console-top{display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid var(--line);font:12px var(--mono);color:var(--soft)}
+.console-top i{width:10px;height:10px;border-radius:50%;background:#20394a}
+.console-top span{margin-left:auto}
+.log{padding:20px 20px 8px;font:13px/1.95 var(--mono);color:var(--soft);min-height:260px}
+.log div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.log .cmd{color:var(--text)}
+.log .ok{color:var(--teal)}
+.log .go{color:var(--cyan);font-weight:500}
+.log .anim{opacity:0;animation:in .4s forwards}
+@keyframes in{to{opacity:1}}
+.site-card{margin:12px 20px 20px;border-radius:12px;background:linear-gradient(140deg,#0e2c40,#0a1d2c);border:1px solid var(--line);padding:20px;position:relative;overflow:hidden}
+.site-card::after{content:"";position:absolute;right:-40px;bottom:-60px;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,rgba(91,147,242,.35),transparent 70%)}
+.site-card small{font:11px var(--mono);color:var(--teal)}
+.site-card strong{display:block;font:700 22px/1.2 var(--display);margin:8px 0 14px;max-width:260px}
+.site-card em{font-style:normal;display:inline-block;background:var(--teal);color:var(--night);font-size:12px;font-weight:700;padding:7px 11px;border-radius:7px}
+
+/* strip */
+.strip{border-block:1px solid var(--line);background:var(--deep)}
+.strip .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 28px;padding-block:22px}
+.strip p{font-size:15px;color:var(--soft)}
+.strip p b{color:#2d5266;margin:0 10px;font-weight:400}
+.flags{display:flex;gap:8px;flex-wrap:wrap}
+.flags span{font:500 12px/1 var(--mono);border:1px solid var(--line);border-radius:999px;padding:8px 12px;color:var(--text)}
+
+section{padding-block:96px}
+.head{display:grid;grid-template-columns:1fr 1fr;gap:20px 64px;align-items:end;margin-bottom:48px}
+.head h2{font-size:clamp(32px,4vw,50px);font-weight:700;margin-top:18px}
+.head p{color:var(--soft);font-size:17px;max-width:460px}
+
+/* offer */
+.offer .wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.offer h2{font-size:clamp(30px,3.6vw,46px);font-weight:700;margin-top:18px}
+.pillars{display:grid;gap:14px}
+.pillar{display:grid;grid-template-columns:auto 1fr;gap:16px;padding:22px;border:1px solid var(--line);border-radius:var(--r);background:var(--deep)}
+.pillar .tag{font:600 11px/1 var(--mono);letter-spacing:.08em;padding:8px 10px;border-radius:8px;height:max-content;text-transform:uppercase}
+.tag.free{background:rgba(95,224,200,.14);color:var(--teal)}
+.tag.paid{background:rgba(91,147,242,.16);color:#8fb4f7}
+.pillar h3{font-size:19px;margin-bottom:6px}
+.pillar p{color:var(--soft);font-size:15px}
+
+/* plans */
+.plans{background:linear-gradient(180deg,var(--night),var(--deep) 45%,var(--night))}
+.plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.plan{position:relative;display:flex;flex-direction:column;padding:34px;border:1px solid var(--line);border-radius:22px;background:var(--panel)}
+.plan.featured{border-color:rgba(51,227,230,.55);box-shadow:0 0 0 1px rgba(51,227,230,.15),0 20px 60px rgba(51,227,230,.10)}
+.plan-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.plan-name{font:600 13px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--soft)}
+.featured .plan-name{color:var(--teal)}
+.badge{font:700 11px/1 var(--body);letter-spacing:.06em;text-transform:uppercase;background:var(--teal);color:var(--night);padding:8px 12px;border-radius:999px}
+.price{display:flex;align-items:baseline;gap:8px;margin:22px 0 10px;font-variant-numeric:tabular-nums}
+.price b{font:800 clamp(52px,6vw,68px)/1 var(--display);letter-spacing:-.04em}
+.price span{color:var(--soft);font-size:17px}
+.plan-desc{color:var(--soft);font-size:16px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+.plan ul{list-style:none;padding:0;margin:24px 0 30px;display:grid;gap:14px}
+.plan li{position:relative;padding-left:32px;font-size:16px}
+.plan li::before{content:"";position:absolute;left:2px;top:2px;width:14px;height:8px;border-left:2px solid var(--teal);border-bottom:2px solid var(--teal);transform:rotate(-45deg);margin-top:6px}
+.plan li strong{color:var(--teal);font-weight:600}
+.plan .btn{margin-top:auto;width:100%}
+.once{margin-top:22px;display:grid;grid-template-columns:1fr auto;gap:20px 40px;align-items:center;padding:30px 34px;border:1px solid var(--line);border-radius:22px;background:var(--panel)}
+.once p{color:var(--soft);font-size:16px;margin-top:10px;max-width:640px}
+.once .from{text-align:right}
+.once .from small{color:var(--soft);font-size:14px;display:block}
+.once .from b{font:800 48px/1 var(--display);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.fine{margin-top:20px;font-size:13px;color:var(--soft)}
+
+/* included */
+.inc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.inc{background:var(--night);padding:28px}
+.inc code{display:inline-block;font:500 13px var(--mono);color:var(--cyan);background:rgba(51,227,230,.08);border:1px solid rgba(51,227,230,.2);padding:5px 9px;border-radius:7px;margin-bottom:18px}
+.inc h3{font-size:19px;margin-bottom:8px}
+.inc p{color:var(--soft);font-size:15px}
+
+/* process */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;counter-reset:s}
+.steps li{padding:30px;border:1px solid var(--line);border-radius:var(--r);background:var(--deep);counter-increment:s}
+.steps li::before{content:"0" counter(s);display:block;font:500 13px var(--mono);color:var(--cyan);margin-bottom:22px}
+.steps h3{font-size:21px;margin-bottom:10px}
+.steps p{color:var(--soft);font-size:15px}
+
+/* analysis */
+.ana{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.ana article{border-top:1px solid var(--line);padding-top:24px}
+.ana h3{font-size:20px;margin-bottom:10px}
+.ana p{color:var(--soft);font-size:15px}
+.ana .q{font:500 12px var(--mono);color:var(--teal);margin-bottom:14px;display:block}
+
+/* request */
+.request{background:var(--deep);border-block:1px solid var(--line)}
+.request .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px}
+.request h2{font-size:clamp(36px,5vw,60px);font-weight:800;margin:18px 0 20px}
+.request .copy>p{color:var(--soft);font-size:17px;max-width:420px}
+.team-label{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-top:36px}
+.people{display:grid;grid-template-columns:1fr;gap:10px;margin-top:14px}
+.person{align-items:center}
+.person>div{flex:1}
+.person .mail{display:block;font-size:14px;margin-top:2px}
+.tel{display:flex;align-items:center;gap:10px;margin-top:8px;font:500 14px var(--mono);color:var(--text);white-space:nowrap}
+.wa{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--wa);color:#fff!important;flex:none;transition:transform .2s,background .2s}
+.wa:hover{background:#148a53;transform:scale(1.08)}
+@media (max-width:520px){.people{grid-template-columns:1fr}}
+.person{display:flex;align-items:center;gap:14px;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--night)}
+.av{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--blue));color:var(--night);font:700 14px var(--display);flex:none}
+.person div{min-width:0}
+.person strong{display:block;font:600 16px var(--display)}
+.person a{color:var(--teal);text-decoration:none;font-size:15px;word-break:break-all}
+.wa-line{display:inline-flex;align-items:center;gap:10px;margin-top:22px;color:var(--text);text-decoration:none;font-weight:600}
+.wa-line span{font-family:var(--mono);color:var(--soft);font-weight:400}
+.form{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:32px;min-width:0}
+.form h3{font-size:24px;margin-bottom:6px}
+.form>form>p,.form .sub{color:var(--soft);font-size:14px;margin-bottom:22px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:block;font-size:13px;font-weight:600;margin-bottom:14px;color:var(--text)}
+label .opt{font-weight:400;color:var(--soft)}
+input:not([type=checkbox]),select,textarea{display:block;width:100%;margin-top:7px;background:var(--night);color:var(--text);border:1px solid #23445a;border-radius:10px;padding:12px 13px;font:15px var(--body);min-width:0}
+textarea{resize:vertical}
+input::placeholder,textarea::placeholder{color:#5f7a88}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--cyan);outline-offset:1px;border-color:transparent}
+input:disabled{opacity:.45}
+.check{display:flex;align-items:center;gap:8px;font-weight:500;font-size:13px;color:var(--soft);margin-top:-6px}
+.check input{accent-color:var(--cyan);width:16px;height:16px}
+.plan-pick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:8px 0 16px;border:0;padding:0}
+.plan-pick legend{font-size:13px;font-weight:600;margin-bottom:8px;padding:0}
+.plan-pick label{margin:0;position:relative}
+.plan-pick input{position:absolute;opacity:0;pointer-events:none}
+.plan-pick span{display:block;text-align:center;padding:11px 6px;border:1px solid #23445a;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;color:var(--soft);line-height:1.25}
+.plan-pick span small{display:block;font:400 11px var(--mono);margin-top:3px}
+.plan-pick input:checked+span{border-color:var(--cyan);color:var(--text);background:rgba(51,227,230,.08)}
+.plan-pick input:focus-visible+span{outline:2px solid var(--cyan);outline-offset:2px}
+.privacy{font-size:12px;color:var(--soft);margin:4px 0 18px}
+.form .btn{width:100%}
+.btn-wa{background:var(--wa);color:#fff}
+.btn-wa:hover{background:#148a53}
+pre{white-space:pre-wrap;word-break:break-word;font:13px/1.7 var(--mono);background:var(--night);border:1px solid var(--line);color:var(--text);padding:18px;border-radius:12px;max-height:340px;overflow:auto;margin:16px 0 18px}
+.link-btn{all:unset;cursor:pointer;color:var(--teal);font-size:14px;margin-top:16px;display:inline-block}
+
+/* faq */
+.faq .wrap{max-width:860px}
+.faq h2{font-size:clamp(30px,4vw,44px);margin:18px 0 32px}
+details{border-bottom:1px solid var(--line);padding:20px 0}
+summary{cursor:pointer;font:600 17px var(--display);list-style:none;display:flex;justify-content:space-between;gap:20px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--cyan);font:400 22px/1 var(--mono)}
+details[open] summary::after{content:"–"}
+details p{color:var(--soft);margin-top:12px;font-size:16px}
+
+footer{border-top:1px solid var(--line)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;padding-block:36px 40px;font-size:14px;color:var(--soft)}
+footer a{color:var(--text);text-decoration:none}
+
+.fab{position:fixed;z-index:55;right:calc(20px + env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:10px;padding:14px 20px;border-radius:999px;background:var(--wa);color:#fff;text-decoration:none;font-weight:700;font-size:14px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.fab:hover{background:#148a53}
+
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--cyan);outline-offset:4px;border-radius:6px}
+
+@media (max-width:960px){
+  nav a.lnk{display:none}
+  .hero .wrap,.offer .wrap,.request .wrap{grid-template-columns:1fr;gap:40px}
+  .head{grid-template-columns:1fr}
+  .inc-grid{grid-template-columns:1fr 1fr}
+  .steps,.ana{grid-template-columns:1fr}
+  .ana{gap:24px}
+}
+@media (max-width:720px){
+  section{padding-block:68px}
+  .plan-grid{grid-template-columns:1fr}
+  .once{grid-template-columns:1fr}
+  .once .from{text-align:left}
+  .plan,.once,.form{padding:24px}
+  .inc-grid{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr;gap:0}
+  .plan-pick{grid-template-columns:1fr 1fr}
+  .bar .btn{display:none}
+  .fab span{display:none}
+  .fab{padding:15px}
+  .brand small{display:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}.log .anim{opacity:1}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#top"><img src="assets/atlin-mark.png" alt="" width="46" height="46"><span><b>Atlin Systems</b><small data-i18n="brandSub">Soluções web</small></span></a>
+    <nav aria-label="Menu">
+      <a class="lnk" href="#planos" data-i18n="navPlans">Planos</a>
+      <a class="lnk" href="#processo" data-i18n="navHow">Como funciona</a>
+      <a class="lnk" href="#faq" data-i18n="navFaq">Dúvidas</a>
+      <div class="langs" role="group" aria-label="Idioma / Idioma">
+        <button type="button" data-lang="pt" aria-pressed="true">PT</button>
+        <button type="button" data-lang="es" aria-pressed="false">ES</button>
+      </div>
+      <a class="btn btn-main btn-sm" href="#pedido" data-i18n="navCta">Pedir prévia grátis</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero" style="padding-block:0">
+  <div class="wrap">
+    <div>
+      <p class="label" data-i18n="heroEyebrow">Websites com mensalidade fixa</p>
+      <h1 data-i18n="heroTitle">O seu website,<br><span class="grad">sempre em boas mãos.</span></h1>
+      <p class="lead" data-i18n="heroLead">Criamos o website da sua empresa sem custo de criação. Paga uma mensalidade fixa, sem surpresas, e nós tratamos do alojamento, da segurança e das atualizações.</p>
+      <div class="cta-row">
+        <a class="btn btn-main" href="#pedido" data-i18n="heroCta1">Quero a minha prévia gratuita ↗</a>
+        <a class="btn btn-ghost" href="#planos" data-i18n="heroCta2">Ver planos e preços</a>
+      </div>
+      <div class="facts">
+        <span data-i18n="fact1">a partir de <b>95 €</b>/mês</span>
+        <span data-i18n="fact2"><b>0 €</b> de criação</span>
+        <span data-i18n="fact3"><b>30 min</b> para a primeira prévia*</span>
+      </div>
+    </div>
+    <div class="console" aria-hidden="true">
+      <div class="console-top"><i></i><i></i><i></i><span>atlin · deploy</span></div>
+      <div class="log" id="log">
+        <div class="cmd">$ atlin new <span data-i18n="logDomain">a-sua-empresa.es</span></div>
+        <div class="ok anim" style="animation-delay:.4s" data-i18n="log1">✓ design à medida da sua marca</div>
+        <div class="ok anim" style="animation-delay:.9s" data-i18n="log2">✓ versão para telemóvel e computador</div>
+        <div class="ok anim" style="animation-delay:1.4s" data-i18n="log3">✓ certificado SSL ativo</div>
+        <div class="ok anim" style="animation-delay:1.9s" data-i18n="log4">✓ cópias de segurança agendadas</div>
+        <div class="ok anim" style="animation-delay:2.4s" data-i18n="log5">✓ email profissional configurado</div>
+        <div class="go anim" style="animation-delay:3s" data-i18n="log6">→ online. A equipa Atlin acompanha.</div>
+      </div>
+      <div class="site-card">
+        <small data-i18n="cardSmall">o seu próximo website</small>
+        <strong data-i18n="cardTitle">Um bom trabalho merece ser visto.</strong>
+        <em data-i18n="cardBtn">Pedir orçamento ↗</em>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap">
+    <p data-i18n="sectors">Indústria <b>/</b> Carpintaria <b>/</b> Construção <b>/</b> Saúde e beleza <b>/</b> Comércio e serviços</p>
+    <div class="flags"><span>España</span><span>Portugal</span><span>Brasil</span><span>Europa</span></div>
+  </div>
+</div>
+
+<section class="offer">
+  <div class="wrap">
+    <div>
+      <p class="label" data-i18n="offerEyebrow">Uma proposta simples</p>
+      <h2 data-i18n="offerTitle">Nós criamos.<br>Acompanhamos a evolução.</h2>
+    </div>
+    <div class="pillars">
+      <div class="pillar"><span class="tag free" data-i18n="tagFree">Grátis</span><div><h3 data-i18n="p1t">Criação do website</h3><p data-i18n="p1d">Incluída quando contrata um plano mensal. Desenhamos e desenvolvemos à medida do seu negócio.</p></div></div>
+      <div class="pillar"><span class="tag paid" data-i18n="tagMonth">Mensal</span><div><h3 data-i18n="p2t">Manutenção e evolução</h3><p data-i18n="p2d">Alojamento, segurança, cópias e suporte numa mensalidade fixa. Sabe sempre quanto paga.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="plans" id="planos">
+  <div class="wrap">
+    <div class="head">
+      <div><p class="label" data-i18n="plansEyebrow">Planos de website</p><h2 data-i18n="plansTitle">Escolha o ritmo<br>do seu negócio.</h2></div>
+      <p data-i18n="plansLead">Dois planos mensais com criação incluída, ou uma compra única para quem prefere ser dono do projeto desde o primeiro dia.</p>
+    </div>
+    <div class="plan-grid">
+      <article class="plan">
+        <div class="plan-top"><span class="plan-name" data-i18n="ess">Essencial</span></div>
+        <div class="price"><b>95 €</b><span data-i18n="perMonth">/mês</span></div>
+        <p class="plan-desc" data-i18n="essDesc">Presença online profissional, sem preocupações.</p>
+        <ul>
+          <li data-i18n="e1">Website institucional criado à medida</li>
+          <li data-i18n="e2">Alojamento, certificado SSL e cópias de segurança</li>
+          <li data-i18n="e3">Manutenção e suporte técnico</li>
+          <li data-i18n="e4">Pequenas alterações de conteúdo todos os meses</li>
+        </ul>
+        <a class="btn btn-ghost" href="#pedido" data-plan="essencial" data-i18n="chooseEss">Escolher Essencial</a>
+      </article>
+      <article class="plan featured">
+        <div class="plan-top"><span class="plan-name" data-i18n="evo">Evolução</span><span class="badge" data-i18n="badge">Mais completo</span></div>
+        <div class="price"><b>179 €</b><span data-i18n="perMonth">/mês</span></div>
+        <p class="plan-desc" data-i18n="evoDesc">Um website que cresce com o seu negócio.</p>
+        <ul>
+          <li data-i18n="v1"><strong>Tudo o que inclui o Essencial</strong></li>
+          <li data-i18n="v2">Horas mensais de desenvolvimento incluídas</li>
+          <li data-i18n="v3">Novas funcionalidades e melhorias com prioridade</li>
+          <li data-i18n="v4">Análises periódicas de usabilidade e velocidade</li>
+          <li data-i18n="v5"><strong>Formação</strong> para gerir o website com autonomia</li>
+        </ul>
+        <a class="btn btn-main" href="#pedido" data-plan="evolucao" data-i18n="chooseEvo">Escolher Evolução ↗</a>
+      </article>
+    </div>
+    <div class="once">
+      <div>
+        <span class="plan-name" data-i18n="once">Compra única</span>
+        <p data-i18n="onceDesc">Website feito à medida, com entrega dos direitos e materiais previstos em contrato. Alojamento e manutenção à parte.</p>
+      </div>
+      <div class="from"><small data-i18n="from">a partir de</small><b>600 €</b></div>
+    </div>
+    <p class="fine" data-i18n="fine">Valores e condições finais confirmados na proposta, antes de qualquer compromisso.</p>
+  </div>
+</section>
+
+<section class="included">
+  <div class="wrap">
+    <div class="head">
+      <div><p class="label" data-i18n="incEyebrow">A identidade digital da sua empresa</p><h2 data-i18n="incTitle">O seu nome.<br>Uma presença profissional.</h2></div>
+      <p data-i18n="incLead">Além do website, tratamos dos detalhes técnicos que dão confiança a quem procura a sua empresa.</p>
+    </div>
+    <div class="inc-grid">
+      <div class="inc"><code data-i18n="c1">www.suaempresa.es</code><h3 data-i18n="i1t">Domínio próprio</h3><p data-i18n="i1d">Registo e configuração de um endereço com o nome da sua empresa, sujeito a disponibilidade.</p></div>
+      <div class="inc"><code data-i18n="c2">geral@suaempresa.es</code><h3 data-i18n="i2t">Email profissional</h3><p data-i18n="i2d">Contas de email associadas ao seu domínio, para comunicar com a identidade da empresa.</p></div>
+      <div class="inc"><code>https://</code><h3 data-i18n="i3t">Ligação segura</h3><p data-i18n="i3d">Certificado SSL ativo, para que os visitantes e o Google confiem no seu website.</p></div>
+      <div class="inc"><code>backup ✓</code><h3 data-i18n="i4t">Cópias de segurança</h3><p data-i18n="i4d">O seu conteúdo guardado e recuperável, sem ter de pensar nisso.</p></div>
+      <div class="inc"><code>320px → 1920px</code><h3 data-i18n="i5t">Em todos os ecrãs</h3><p data-i18n="i5d">Pensado para telemóvel, tablet e computador, onde os seus clientes estiverem.</p></div>
+      <div class="inc"><code>WhatsApp ↗</code><h3 data-i18n="i6t">Contacto direto</h3><p data-i18n="i6d">Botões e formulários que levam o cliente ao próximo passo: ligar, escrever ou pedir orçamento.</p></div>
+    </div>
+    <p class="fine" data-i18n="incFine">Custos de registo e renovação do domínio e condições das contas de email são apresentados na proposta.</p>
+  </div>
+</section>
+
+<section class="process" id="processo" style="padding-top:0">
+  <div class="wrap">
+    <div class="head">
+      <div><p class="label" data-i18n="procEyebrow">Sem complicar</p><h2 data-i18n="procTitle">Da primeira ideia<br>ao website online.</h2></div>
+      <p data-i18n="procLead">Antes de propor uma solução, queremos compreender o seu negócio.</p>
+    </div>
+    <ol class="steps">
+      <li><h3 data-i18n="s1t">Conte-nos sobre a sua empresa</h3><p data-i18n="s1d">Partilhe a atividade, os contactos e o que quer apresentar. Se já tem website, envie-nos o endereço.</p></li>
+      <li><h3 data-i18n="s2t">Valide uma primeira prévia</h3><p data-i18n="s2d">Depois de confirmarmos os dados, preparamos em 30 minutos uma prévia visual para avaliar o conceito.</p></li>
+      <li><h3 data-i18n="s3t">Escolha o plano e avançamos</h3><p data-i18n="s3d">Acordamos o plano, as condições e o prazo da versão final. Depois disso, o website fica connosco a cuidar dele.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="analysis" style="padding-top:0">
+  <div class="wrap">
+    <div class="head">
+      <div><p class="label" data-i18n="anaEyebrow">O que analisamos</p><h2 data-i18n="anaTitle">Pequenos obstáculos.<br>Boas oportunidades.</h2></div>
+      <p data-i18n="anaLead">Olhamos para o que os seus clientes precisam de perceber, encontrar e fazer.</p>
+    </div>
+    <div class="ana">
+      <article><span class="q" data-i18n="a1q">percebe-se em 5 segundos?</span><h3 data-i18n="a1t">A sua mensagem</h3><p data-i18n="a1d">É fácil perceber o que faz, para quem trabalha e porque escolher a sua empresa?</p></article>
+      <article><span class="q" data-i18n="a2q">ajuda a decidir?</span><h3 data-i18n="a2t">O seu trabalho</h3><p data-i18n="a2d">Os serviços e projetos estão bem apresentados, com a informação certa?</p></article>
+      <article><span class="q" data-i18n="a3q">quantos cliques até ao contacto?</span><h3 data-i18n="a3t">O próximo passo</h3><p data-i18n="a3d">Contactos, botões e pedidos de orçamento tornam simples falar consigo?</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="request" id="pedido">
+  <div class="wrap">
+    <div class="copy">
+      <p class="label" data-i18n="reqEyebrow">Vamos conversar</p>
+      <h2 data-i18n="reqTitle">Comecemos pelo seu <span class="grad">website.</span></h2>
+      <p data-i18n="reqLead">Preencha os dados e reveja a mensagem antes de a enviar pelo WhatsApp. A prévia é gratuita e não obriga a contratar.</p>
+      <p class="team-label" data-i18n="teamLabel">A equipa Atlin</p>
+      <div class="people">
+        <div class="person"><span class="av">ML</span><div><strong>Maurício Lima</strong><a class="mail" href="mailto:mauricio@atlinsystems.com">mauricio@atlinsystems.com</a><span class="tel"><span>+34 613 147 988</span><a class="wa" href="https://wa.me/34613147988" target="_blank" rel="noopener" aria-label="WhatsApp Maurício Lima +34 613 147 988" title="WhatsApp Maurício Lima"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.66 15L2 22l5.14-1.35A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.09-1.12l-.29-.17-3.05.8.81-2.97-.19-.3A8 8 0 1 1 12 20zm4.4-5.92c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.920-1.18-.71-.63-1.19-1.42-1.33-1.66-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.690 2.58 4.1 3.62.57.25 1.02.39 1.37.5.57.18 1.09.16 1.5.1.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"/></svg></a></span></div></div>
+        <div class="person"><span class="av">F</span><div><strong>Felipe</strong><a class="mail" href="mailto:felipe@atlinsystems.com">felipe@atlinsystems.com</a><span class="tel"><span>+55 28 99885-0932</span><a class="wa" href="https://wa.me/5528998850932" target="_blank" rel="noopener" aria-label="WhatsApp Felipe +55 28 99885-0932" title="WhatsApp Felipe"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.66 15L2 22l5.14-1.35A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.09-1.12l-.29-.17-3.05.8.81-2.97-.19-.3A8 8 0 1 1 12 20zm4.4-5.92c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.920-1.18-.71-.63-1.19-1.42-1.33-1.66-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.690 2.58 4.1 3.62.57.25 1.02.39 1.37.5.57.18 1.09.16 1.5.1.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"/></svg></a></span></div></div>
+        <div class="person"><span class="av">AC</span><div><strong>Ana Cristina</strong><a class="mail" href="mailto:anacristina@atlinsystems.com">anacristina@atlinsystems.com</a><span class="tel"><span>+34 606 42 96 94</span><a class="wa" href="https://wa.me/34606429694" target="_blank" rel="noopener" aria-label="WhatsApp Ana Cristina +34 606 42 96 94" title="WhatsApp Ana Cristina"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.66 15L2 22l5.14-1.35A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.09-1.12l-.29-.17-3.05.8.81-2.97-.19-.3A8 8 0 1 1 12 20zm4.4-5.92c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.920-1.18-.71-.63-1.19-1.42-1.33-1.66-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.690 2.58 4.1 3.62.57.25 1.02.39 1.37.5.57.18 1.09.16 1.5.1.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"/></svg></a></span></div></div>
+        <div class="person"><span class="av">HP</span><div><strong>Heloiza Panisset</strong><a class="mail" href="mailto:heloizapanisset@atlinsystems.com">heloizapanisset@atlinsystems.com</a><span class="tel"><span>+34 654 41 57 59</span><a class="wa" href="https://wa.me/34654415759" target="_blank" rel="noopener" aria-label="WhatsApp Heloiza Panisset +34 654 41 57 59" title="WhatsApp Heloiza Panisset"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.66 15L2 22l5.14-1.35A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.09-1.12l-.29-.17-3.05.8.81-2.97-.19-.3A8 8 0 1 1 12 20zm4.4-5.92c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.920-1.18-.71-.63-1.19-1.42-1.33-1.66-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.690 2.58 4.1 3.62.57.25 1.02.39 1.37.5.57.18 1.09.16 1.5.1.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"/></svg></a></span></div></div>
+      </div>
+    </div>
+    <div class="form">
+      <form id="lead" novalidate>
+        <h3 data-i18n="formTitle">Peça a sua prévia gratuita</h3>
+        <p class="sub" data-i18n="formSub">Criação incluída nos planos mensais. Resposta pelo WhatsApp.</p>
+        <fieldset class="plan-pick">
+          <legend data-i18n="fPlan">Plano que lhe interessa</legend>
+          <label><input type="radio" name="plano" id="pl-ess" value="essencial"><span><span data-i18n="ess">Essencial</span><small>95 €/m</small></span></label>
+          <label><input type="radio" name="plano" id="pl-evo" value="evolucao" checked><span><span data-i18n="evo">Evolução</span><small>179 €/m</small></span></label>
+          <label><input type="radio" name="plano" id="pl-once" value="unica"><span><span data-i18n="onceShort">Compra única</span><small>600 €+</small></span></label>
+          <label><input type="radio" name="plano" id="pl-undec" value="indeciso"><span><span data-i18n="undecided">Ainda a decidir</span><small>—</small></span></label>
+        </fieldset>
+        <div class="row">
+          <label for="f-nome"><span data-i18n="fName">O seu nome</span><input id="f-nome" name="nome" required autocomplete="name" maxlength="120" data-i18n-ph="phName" placeholder="Como se chama?"></label>
+          <label for="f-emp"><span data-i18n="fCompany">Empresa</span><input id="f-emp" name="empresa" required autocomplete="organization" maxlength="160" data-i18n-ph="phCompany" placeholder="Nome da empresa"></label>
+        </div>
+        <div class="row">
+          <label for="f-email"><span data-i18n="fEmail">Email</span><input id="f-email" name="email" type="email" required autocomplete="email" maxlength="200" data-i18n-ph="phEmail" placeholder="nome@empresa.es"></label>
+          <label for="f-setor"><span data-i18n="fSector">Área de atividade</span>
+            <select id="f-setor" name="setor" required>
+              <option value="" data-i18n="optSel">Selecione</option>
+              <option data-i18n="opt1">Indústria e metalomecânica</option>
+              <option data-i18n="opt2">Carpintaria e mobiliário</option>
+              <option data-i18n="opt3">Construção e remodelação</option>
+              <option data-i18n="opt4">Saúde e beleza</option>
+              <option data-i18n="opt5">Comércio e serviços</option>
+              <option data-i18n="opt6">Outra atividade</option>
+            </select></label>
+        </div>
+        <label for="f-site"><span data-i18n="fSite">Website atual</span><input id="f-site" name="website" inputmode="url" required maxlength="400" placeholder="www.a-sua-empresa.es"></label>
+        <label class="check" for="f-nosite"><input type="checkbox" id="f-nosite"> <span data-i18n="noSite">Ainda não tenho website</span></label>
+        <label for="f-obj" style="margin-top:14px"><span data-i18n="fGoal">O que é mais importante para si?</span> <span class="opt" data-i18n="optional">(opcional)</span><textarea id="f-obj" name="objetivo" rows="3" maxlength="1500" data-i18n-ph="phGoal" placeholder="Por exemplo: mostrar os projetos e receber pedidos de orçamento."></textarea></label>
+        <p class="privacy" data-i18n="privacy">Os dados ficam no seu dispositivo até confirmar o envio no WhatsApp. Usamos a informação apenas para responder ao seu pedido.</p>
+        <p class="privacy" id="err" role="alert" hidden style="color:#ff9b8a"></p>
+        <button class="btn btn-main" type="submit" data-i18n="submit">Preparar o meu pedido ↗</button>
+      </form>
+      <div id="review" hidden tabindex="-1">
+        <p class="label" data-i18n="revEyebrow">Pedido preparado</p>
+        <h3 style="margin-top:14px" data-i18n="revTitle">Está tudo certo?</h3>
+        <p class="sub" style="margin-top:8px" data-i18n="revSub">Reveja a mensagem. Ainda não foi enviada.</p>
+        <pre id="msg"></pre>
+        <a class="btn btn-wa" id="send" target="_blank" rel="noopener" data-i18n="send">Continuar no WhatsApp ↗</a>
+        <button type="button" class="link-btn" id="back" data-i18n="back">← Corrigir dados</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="wrap">
+    <p class="label" data-i18n="faqEyebrow">Ainda tem dúvidas?</p>
+    <h2 data-i18n="faqTitle">Antes de começarmos.</h2>
+    <details><summary data-i18n="q1">O que é gratuito e o que é pago?</summary><p data-i18n="r1">A prévia e a criação do website são gratuitas quando contrata um plano mensal (Essencial ou Evolução). A mensalidade cobre alojamento, segurança, cópias de segurança, manutenção e suporte.</p></details>
+    <details><summary data-i18n="q2">Qual a diferença entre Essencial e Evolução?</summary><p data-i18n="r2">O Essencial mantém o seu website online, seguro e atualizado, com pequenas alterações de conteúdo todos os meses. O Evolução inclui tudo isso e ainda horas mensais de desenvolvimento, novas funcionalidades com prioridade, análises de usabilidade e velocidade e formação para gerir o website.</p></details>
+    <details><summary data-i18n="q3">E se preferir pagar uma única vez?</summary><p data-i18n="r3">Com a Compra única, a partir de 600 €, recebe o website feito à medida, com os direitos e materiais previstos em contrato. O alojamento e a manutenção são contratados à parte.</p></details>
+    <details><summary data-i18n="q4">Também tratam do domínio e do email?</summary><p data-i18n="r4">Sim. Confirmamos a disponibilidade do nome e apresentamos na proposta os custos de registo e renovação e as condições das contas de email.</p></details>
+    <details><summary data-i18n="q5">Recebo o website final em 30 minutos?</summary><p data-i18n="r5">Os 30 minutos referem-se à primeira prévia visual, depois de confirmarmos os dados do pedido. A versão final depende dos conteúdos e funcionalidades acordados. Pedir uma prévia não obriga a contratar.</p></details>
+    <details><summary data-i18n="q6">Ainda não tenho website. Podem ajudar?</summary><p data-i18n="r6">Claro. Assinale essa opção no formulário e ajudamos a definir a estrutura e o conteúdo mais adequados ao seu negócio.</p></details>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="assets/atlin-mark.png" alt="" width="46" height="46"><span><b>Atlin Systems</b><small data-i18n="footerSub">Brasil, Portugal, Espanha e Europa</small></span></a>
+    <span data-i18n="footerNote">Tecnologia com propósito. Conversas de pessoa para pessoa.</span>
+    <span>© <span id="yr">2026</span> Atlin Systems · <a href="https://wa.me/34613147988" target="_blank" rel="noopener">+34 613 147 988</a></span>
+  </div>
+</footer>
+
+
+<script>
+'use strict';
+const WA='34613147988';
+const ES={
+brandSub:'Soluciones web',navPlans:'Planes',navHow:'Cómo funciona',navFaq:'Dudas',navCta:'Pedir vista previa gratis',
+heroEyebrow:'Webs con cuota mensual fija',
+heroTitle:'Tu web,<br><span class="grad">siempre en buenas manos.</span>',
+heroLead:'Creamos la web de tu empresa sin coste de creación. Pagas una cuota mensual fija, sin sorpresas, y nosotros nos encargamos del alojamiento, la seguridad y las actualizaciones.',
+heroCta1:'Quiero mi vista previa gratis ↗',heroCta2:'Ver planes y precios',
+fact1:'desde <b>95 €</b>/mes',fact2:'<b>0 €</b> de creación',fact3:'<b>30 min</b> para la primera vista previa*',
+logDomain:'tu-empresa.es',log1:'✓ diseño a medida de tu marca',log2:'✓ versión para móvil y ordenador',log3:'✓ certificado SSL activo',log4:'✓ copias de seguridad programadas',log5:'✓ email profesional configurado',log6:'→ online. El equipo Atlin te acompaña.',
+cardSmall:'tu próxima web',cardTitle:'Un buen trabajo merece ser visto.',cardBtn:'Pedir presupuesto ↗',
+sectors:'Industria <b>/</b> Carpintería <b>/</b> Construcción <b>/</b> Salud y belleza <b>/</b> Comercio y servicios',
+offerEyebrow:'Una propuesta sencilla',offerTitle:'Nosotros la creamos.<br>Te acompañamos en su evolución.',
+tagFree:'Gratis',tagMonth:'Mensual',p1t:'Creación de la web',p1d:'Incluida al contratar un plan mensual. Diseñamos y desarrollamos a medida de tu negocio.',p2t:'Mantenimiento y evolución',p2d:'Alojamiento, seguridad, copias y soporte en una cuota fija. Siempre sabes cuánto pagas.',
+plansEyebrow:'Planes de web',plansTitle:'Elige el ritmo<br>de tu negocio.',plansLead:'Dos planes mensuales con la creación incluida, o un pago único para quien prefiere ser dueño del proyecto desde el primer día.',
+ess:'Esencial',perMonth:'/mes',essDesc:'Presencia online profesional, sin preocupaciones.',
+e1:'Web corporativa creada a medida',e2:'Alojamiento, certificado SSL y copias de seguridad',e3:'Mantenimiento y soporte técnico',e4:'Pequeños cambios de contenido cada mes',chooseEss:'Elegir Esencial',
+evo:'Evolución',badge:'Más completo',evoDesc:'Una web que crece con tu negocio.',
+v1:'<strong>Todo lo que incluye el Esencial</strong>',v2:'Horas mensuales de desarrollo incluidas',v3:'Nuevas funcionalidades y mejoras con prioridad',v4:'Análisis periódicos de usabilidad y velocidad',v5:'<strong>Formación</strong> para gestionar la web con autonomía',chooseEvo:'Elegir Evolución ↗',
+once:'Pago único',onceShort:'Pago único',onceDesc:'Web hecha a medida, con entrega de los derechos y materiales previstos en el contrato. Alojamiento y mantenimiento aparte.',from:'desde',
+fine:'Precios y condiciones finales confirmados en la propuesta, antes de cualquier compromiso.',
+incEyebrow:'La identidad digital de tu empresa',incTitle:'Tu nombre.<br>Una presencia profesional.',incLead:'Además de la web, nos ocupamos de los detalles técnicos que dan confianza a quien busca tu empresa.',
+c1:'www.tuempresa.es',c2:'info@tuempresa.es',
+i1t:'Dominio propio',i1d:'Registro y configuración de una dirección con el nombre de tu empresa, sujeto a disponibilidad.',
+i2t:'Email profesional',i2d:'Cuentas de correo asociadas a tu dominio, para comunicarte con la imagen de tu empresa.',
+i3t:'Conexión segura',i3d:'Certificado SSL activo, para que tus visitantes y Google confíen en tu web.',
+i4t:'Copias de seguridad',i4d:'Tu contenido guardado y recuperable, sin que tengas que pensar en ello.',
+i5t:'En todas las pantallas',i5d:'Pensada para móvil, tablet y ordenador, allí donde estén tus clientes.',
+i6t:'Contacto directo',i6d:'Botones y formularios que llevan al cliente al siguiente paso: llamar, escribir o pedir presupuesto.',
+incFine:'Los costes de registro y renovación del dominio y las condiciones de las cuentas de correo se presentan en la propuesta.',
+procEyebrow:'Sin complicaciones',procTitle:'De la primera idea<br>a tu web online.',procLead:'Antes de proponer una solución, queremos entender tu negocio.',
+s1t:'Cuéntanos sobre tu empresa',s1d:'Comparte tu actividad, tus contactos y lo que quieres mostrar. Si ya tienes web, envíanos la dirección.',
+s2t:'Valida una primera vista previa',s2d:'Tras confirmar los datos, preparamos en 30 minutos una vista previa visual para evaluar el concepto.',
+s3t:'Elige el plan y empezamos',s3d:'Acordamos el plan, las condiciones y el plazo de la versión final. A partir de ahí, nosotros cuidamos de tu web.',
+anaEyebrow:'Qué analizamos',anaTitle:'Pequeños obstáculos.<br>Grandes oportunidades.',anaLead:'Nos fijamos en lo que tus clientes necesitan entender, encontrar y hacer.',
+a1q:'¿se entiende en 5 segundos?',a1t:'Tu mensaje',a1d:'¿Es fácil entender qué haces, para quién trabajas y por qué elegir tu empresa?',
+a2q:'¿ayuda a decidir?',a2t:'Tu trabajo',a2d:'¿Tus servicios y proyectos están bien presentados, con la información adecuada?',
+a3q:'¿cuántos clics hasta el contacto?',a3t:'El siguiente paso',a3d:'¿Los contactos, botones y solicitudes de presupuesto facilitan hablar contigo?',
+reqEyebrow:'Hablemos',reqTitle:'Empecemos por tu <span class="grad">web.</span>',reqLead:'Rellena tus datos y revisa el mensaje antes de enviarlo por WhatsApp. La vista previa es gratuita y no te obliga a contratar.',
+waDirect:'¿Prefieres hablar ya?',formTitle:'Pide tu vista previa gratis',formSub:'Creación incluida en los planes mensuales. Respuesta por WhatsApp.',
+fPlan:'Plan que te interesa',undecided:'Aún lo estoy pensando',fName:'Tu nombre',phName:'¿Cómo te llamas?',fCompany:'Empresa',phCompany:'Nombre de la empresa',fEmail:'Email',phEmail:'nombre@empresa.es',fSector:'Sector',
+optSel:'Selecciona',opt1:'Industria y metalmecánica',opt2:'Carpintería y mobiliario',opt3:'Construcción y reformas',opt4:'Salud y belleza',opt5:'Comercio y servicios',opt6:'Otra actividad',
+fSite:'Web actual',noSite:'Todavía no tengo web',fGoal:'¿Qué es lo más importante para ti?',optional:'(opcional)',phGoal:'Por ejemplo: mostrar mis proyectos y recibir solicitudes de presupuesto.',
+privacy:'Los datos se quedan en tu dispositivo hasta que confirmes el envío en WhatsApp. Usamos la información solo para responder a tu solicitud.',
+submit:'Preparar mi solicitud ↗',revEyebrow:'Solicitud preparada',revTitle:'¿Está todo correcto?',revSub:'Revisa el mensaje. Todavía no se ha enviado.',send:'Continuar en WhatsApp ↗',back:'← Corregir datos',
+faqEyebrow:'¿Tienes dudas?',faqTitle:'Antes de empezar.',
+q1:'¿Qué es gratis y qué se paga?',r1:'La vista previa y la creación de la web son gratuitas al contratar un plan mensual (Esencial o Evolución). La cuota cubre alojamiento, seguridad, copias de seguridad, mantenimiento y soporte.',
+q2:'¿Qué diferencia hay entre Esencial y Evolución?',r2:'El Esencial mantiene tu web online, segura y actualizada, con pequeños cambios de contenido cada mes. El Evolución incluye todo eso y además horas mensuales de desarrollo, nuevas funcionalidades con prioridad, análisis de usabilidad y velocidad y formación para gestionar la web.',
+q3:'¿Y si prefiero pagar una sola vez?',r3:'Con el Pago único, desde 600 €, recibes la web hecha a medida, con los derechos y materiales previstos en el contrato. El alojamiento y el mantenimiento se contratan aparte.',
+q4:'¿También os encargáis del dominio y del email?',r4:'Sí. Comprobamos la disponibilidad del nombre y presentamos en la propuesta los costes de registro y renovación y las condiciones de las cuentas de correo.',
+q5:'¿Recibo la web final en 30 minutos?',r5:'Los 30 minutos se refieren a la primera vista previa visual, una vez confirmados los datos de la solicitud. La versión final depende de los contenidos y funcionalidades acordados. Pedir una vista previa no obliga a contratar.',
+q6:'Todavía no tengo web. ¿Podéis ayudarme?',r6:'Por supuesto. Marca esa opción en el formulario y te ayudamos a definir la estructura y el contenido más adecuados para tu negocio.',
+teamLabel:'El equipo Atlin',footerSub:'Brasil, Portugal, España y Europa',footerNote:'Tecnología con propósito. Conversaciones de persona a persona.',fab:'Hablar por WhatsApp'
+};
+const PT={};
+document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(!(k in PT))PT[k]=el.innerHTML;});
+document.querySelectorAll('[data-i18n-ph]').forEach(el=>{PT[el.dataset.i18nPh]=el.placeholder;});
+const META={pt:{title:'Atlin Systems',lang:'pt-PT'},es:{title:'Atlin Systems',lang:'es'}};
+let lang='pt';
+function setLang(l){
+  lang=l;const d=l==='es'?ES:PT;
+  document.documentElement.lang=META[l].lang;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const v=d[el.dataset.i18n];if(v!==undefined)el.innerHTML=v;});
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{const v=d[el.dataset.i18nPh];if(v!==undefined)el.placeholder=v;});
+  document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));
+  try{localStorage.setItem('atlin-lang',l)}catch(e){}
+  if(!review.hidden)buildMessage();
+}
+const form=document.getElementById('lead'),review=document.getElementById('review'),noSite=document.getElementById('f-nosite'),site=document.getElementById('f-site'),err=document.getElementById('err');
+document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+document.querySelectorAll('[data-plan]').forEach(a=>a.addEventListener('click',()=>{const r=form.querySelector(`input[name=plano][value="${a.dataset.plan}"]`);if(r)r.checked=true;}));
+noSite.addEventListener('change',()=>{site.disabled=noSite.checked;if(noSite.checked)site.value='';});
+const PLAN={pt:{essencial:'Essencial (95 €/mês)',evolucao:'Evolução (179 €/mês)',unica:'Compra única (desde 600 €)',indeciso:'Ainda a decidir'},es:{essencial:'Esencial (95 €/mes)',evolucao:'Evolución (179 €/mes)',unica:'Pago único (desde 600 €)',indeciso:'Aún lo estoy pensando'}};
+const ERR={pt:{req:'Preencha o nome, a empresa, o email e a área de atividade.',email:'Indique um email válido, por exemplo nome@empresa.es.',site:'Indique o endereço do website (por exemplo www.empresa.es) ou assinale que ainda não tem.'},es:{req:'Rellena el nombre, la empresa, el email y el sector.',email:'Indica un email válido, por ejemplo nombre@empresa.es.',site:'Indica la dirección de tu web (por ejemplo www.empresa.es) o marca que todavía no tienes.'}};
+const UTM={};const qs=new URLSearchParams(location.search);['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(k=>{const v=qs.get(k);if(v)UTM[k]=v.slice(0,200);});
+function validate(){
+  const f=form.elements,e=ERR[lang];
+  if(!f.nome.value.trim()||!f.empresa.value.trim()||!f.email.value.trim()||!f.setor.value)return e.req;
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value.trim()))return e.email;
+  if(!noSite.checked){const v=site.value.trim();try{const u=new URL(/^https?:\/\//i.test(v)?v:'https://'+v);if(!u.hostname.includes('.'))throw 0;}catch(_){return e.site;}}
+  return '';
+}
+function buildMessage(){
+  const f=form.elements,p=(form.querySelector('input[name=plano]:checked')||{}).value||'indeciso';
+  const setor=f.setor.options[f.setor.selectedIndex].text;
+  const L=lang==='es'
+    ?['¡Hola, Atlin Systems! Me gustaría pedir una vista previa gratuita de la web de mi empresa.','',`Plan: ${PLAN.es[p]}`,`Nombre: ${f.nome.value.trim()}`,`Empresa: ${f.empresa.value.trim()}`,`Email: ${f.email.value.trim()}`,`Web: ${noSite.checked?'Todavía no tengo web':site.value.trim()}`,`Sector: ${setor}`]
+    :['Olá, Atlin Systems! Gostaria de pedir uma prévia gratuita para o website da minha empresa.','',`Plano: ${PLAN.pt[p]}`,`Nome: ${f.nome.value.trim()}`,`Empresa: ${f.empresa.value.trim()}`,`Email: ${f.email.value.trim()}`,`Website: ${noSite.checked?'Ainda não tenho website':site.value.trim()}`,`Atividade: ${setor}`];
+  const o=f.objetivo.value.trim();if(o)L.push((lang==='es'?'Prioridad: ':'Prioridade: ')+o);
+  if(Object.keys(UTM).length)L.push('',...Object.entries(UTM).map(([k,v])=>`${k}: ${v}`));
+  const m=L.join('\n');document.getElementById('msg').textContent=m;
+  document.getElementById('send').href=`https://wa.me/${WA}?text=${encodeURIComponent(m)}`;
+}
+form.addEventListener('submit',ev=>{ev.preventDefault();const e=validate();if(e){err.textContent=e;err.hidden=false;return;}err.hidden=true;buildMessage();form.hidden=true;review.hidden=false;review.focus();});
+document.getElementById('back').addEventListener('click',()=>{review.hidden=true;form.hidden=false;document.getElementById('f-nome').focus();});
+document.getElementById('yr').textContent=new Date().getFullYear();
+let start='pt';
+try{const s=localStorage.getItem('atlin-lang');if(s)start=s;else if((navigator.language||'').toLowerCase().startsWith('es'))start='es';}catch(e){if((navigator.language||'').toLowerCase().startsWith('es'))start='es';}
+if(location.hash==='#es')start='es';if(location.hash==='#pt')start='pt';
+if(qs.get('lang')==='es')start='es';if(qs.get('lang')==='pt')start='pt';
+if(start!=='pt')setLang(start);
+</script>
+
+</body>
+</html>

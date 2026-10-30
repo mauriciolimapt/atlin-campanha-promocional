@@ -1,0 +1,16 @@
+ATLIN SYSTEMS - Página promocional com planos (PT / ES)
+
+FICHEIROS
+index.html  página completa (estilos e script incluídos)
+assets/atlin-mark.png  símbolo do logótipo
+
+PUBLICAR
+Envie index.html e a pasta assets para o alojamento. Não precisa de compilação.
+
+IDIOMA
+PT por defeito; ES automático para navegadores em espanhol.
+Forçar idioma no link: ...?lang=es  ou  ...?lang=pt  (ou #es / #pt)
+Campanhas: acrescente utm_source, utm_campaign, etc.; seguem na mensagem do WhatsApp.
+
+WHATSAPP
+Número: 34613147988 (procure WA= no script de index.html para alterar).
